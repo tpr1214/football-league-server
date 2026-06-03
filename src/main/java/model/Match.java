@@ -1,5 +1,4 @@
 package model;
-
 public class Match {
     private Long id;
     private Team homeTeam;

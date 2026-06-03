@@ -1,5 +1,4 @@
 package model;
-
 public class Team {
 private long id;
 private String name;

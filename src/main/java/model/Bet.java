@@ -1,5 +1,4 @@
 package model;
-
 public class Bet {
     private Long id;
     private User user;

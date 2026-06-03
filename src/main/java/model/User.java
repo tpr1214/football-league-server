@@ -13,7 +13,6 @@ public class User {
     public User() {
 
     }
-
     public User(Long id, String username, String email, String password, Double balance) {
         this.id = id;
         this.username = username;
