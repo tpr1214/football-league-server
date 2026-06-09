@@ -1,4 +1,4 @@
-package model;
+package org.example.footballleague.model;
 
 public enum BetOutcome {
     HOME_WIN,

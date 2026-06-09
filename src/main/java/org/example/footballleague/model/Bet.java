@@ -1,13 +1,36 @@
-package model;
+package org.example.footballleague.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "bets")
 public class Bet {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "match_id", nullable = false)
     private Match match;
+
+
+    @Enumerated(EnumType.STRING)
     private BetOutcome predictedOutcome;
+
     private Double amount;
     private Double odds;
+
+
+    @Enumerated(EnumType.STRING)
     private BetStatus status = BetStatus.PENDING;
+
+
 
     public Long getId() {
         return id;

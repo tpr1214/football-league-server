@@ -1,4 +1,4 @@
-package model;
+package org.example.footballleague.model;
 
 public enum BetStatus {
     PENDING,
