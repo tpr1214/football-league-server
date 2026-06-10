@@ -1,26 +1,36 @@
 package org.example.footballleague.Service;
 
-import org.example.footballleague.repositories.UserRepository;
 import org.example.footballleague.model.User;
+import org.example.footballleague.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional   // ← זה הקריטי!
 public class UserService {
+
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    // בודק אם הDB אם המשתמש כבר קיים בבסיס הנתונים
 
-        public boolean register(User user) {
-            if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-                return false; // נכשלו, האימייל תפוס
-            }
+    public boolean register(User user) {
+        System.out.println("🔍 Checking if email exists: " + user.getEmail());
 
-            user.setBalance(1000.0);
-            userRepository.save(user); // שומרים בדאטאבייס
-            return true; // הצלחנו!
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            System.out.println("❌ Email already exists!");
+            return false;
         }
-    }
 
+        user.setBalance(1000.0);
+
+        System.out.println("💾 Saving new user: " + user.getUsername() + " | " + user.getEmail());
+
+        User savedUser = userRepository.save(user);
+
+        System.out.println("✅ User saved successfully! ID = " + savedUser.getId());
+
+        return true;
+    }
+}
